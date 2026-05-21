@@ -1,0 +1,125 @@
+.projects-grid {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.tiling-master {
+  flex: 0 0 calc(60% - 12px);
+  display: flex;
+}
+
+.tiling-stack {
+  flex: 0 0 calc(40% - 12px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tiling-master .project-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+}
+
+.tiling-master .project-title {
+  font-size: 2rem;
+}
+
+.projects-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.project-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--text-muted);
+  border-radius: 4px;
+  padding: 24px;
+  position: relative;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+}
+
+.card-top-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--border-muted);
+  transition: background-color 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15); /* violet glow */
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.project-card:hover .card-top-border {
+  background-color: var(--accent-primary);
+}
+
+.project-title {
+  color: var(--accent-primary);
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  transition: color 0.2s ease;
+}
+
+.project-desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.tag {
+  font-size: 0.75rem;
+  color: var(--text-main);
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.hover-arrow {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  color: var(--accent-primary);
+  font-size: 0.85rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+}
+
+.project-card:hover .hover-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 900px) {
+  .projects-grid {
+    flex-direction: column;
+  }
+  .tiling-master, .tiling-stack {
+    flex: 1 1 auto;
+  }
+  .projects-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
