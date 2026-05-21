@@ -7,7 +7,7 @@ const projects = [
     description: 'YOLOv8 industrial defect detection system',
     tags: ['Computer Vision', 'PyTorch', 'Python'],
     featured: true,
-    link: 'https://github.com/yuvarajr/mechsight-ai',
+    link: 'https://github.com/YUVARAJ-R-ai/MechSight-AI',
   },
   {
     title: 'Atlas Finance',
