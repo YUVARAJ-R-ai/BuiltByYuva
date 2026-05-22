@@ -1,111 +1,163 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Projects.css';
 
 const projects = [
   {
     title: 'MechSight AI',
-    description: 'YOLOv8 industrial defect detection system',
-    tags: ['Computer Vision', 'PyTorch', 'Python'],
+    description: 'YOLOv8 industrial defect detection on Raspberry Pi edge hardware with centralized Flask inference server.',
+    tags: ['Computer Vision', 'YOLOv8', 'Flask', 'RPi'],
+    category: 'AI/ML',
     featured: true,
     link: 'https://github.com/YUVARAJ-R-ai/MechSight-AI',
   },
   {
-    title: 'Atlas Finance',
-    description: 'Privacy-first AI finance, local LLMs via Ollama',
-    tags: ['Local LLM', 'Finance', 'React'],
+    title: 'BhoomiNode',
+    description: 'Blockchain AgriTech — voice-first farmer land registration with Groq Llama 3, NDVI satellite verification, and Polygon smart contracts.',
+    tags: ['Blockchain', 'FastAPI', 'Groq', 'Polygon'],
+    category: 'Blockchain',
     featured: false,
-    link: 'https://github.com/yuvarajr/atlas-finance',
+    link: 'https://github.com/YUVARAJ-R-ai',
+  },
+  {
+    title: 'Hunter System',
+    description: 'Solo Leveling-inspired life RPG — turns real tasks into quests with XP, boss raids, and a 12-table PostgreSQL schema.',
+    tags: ['React 19', 'Node.js', 'PostgreSQL', 'Docker'],
+    category: 'Full Stack',
+    featured: false,
+    link: 'https://github.com/YUVARAJ-R-ai',
+  },
+  {
+    title: 'Atlas Finance',
+    description: 'Privacy-first financial platform with local LLMs via Ollama, dual Next.js + Flutter frontend.',
+    tags: ['Local LLM', 'FastAPI', 'Flutter', 'Next.js'],
+    category: 'AI/ML',
+    featured: false,
+    link: 'https://github.com/YUVARAJ-R-ai',
+  },
+  {
+    title: 'Vidora AI',
+    description: 'Hybrid local + cloud AI video analysis platform. Full-stack monorepo with Next.js and FastAPI.',
+    tags: ['Next.js', 'FastAPI', 'Docker', 'AI'],
+    category: 'AI/ML',
+    featured: false,
+    link: 'https://github.com/YUVARAJ-R-ai',
   },
   {
     title: 'Wayline',
-    description: 'Self-hosted routing API, OSRM + PostGIS',
-    tags: ['GIS', 'OSRM', 'PostGIS'],
+    description: 'Self-hosted routing and geocoding API using OSRM and PostGIS — zero cloud dependency.',
+    tags: ['OSRM', 'PostGIS', 'Docker', 'GIS'],
+    category: 'Backend',
     featured: false,
-    link: 'https://github.com/yuvarajr/wayline',
+    link: 'https://github.com/YUVARAJ-R-ai',
   },
   {
     title: 'NoteWeave API',
-    description: 'Whisper + NLP async lecture pipeline',
-    tags: ['Whisper', 'NLP', 'FastAPI'],
+    description: 'Async lecture-to-knowledge-graph pipeline: Whisper speech-to-text + NLP extraction via Celery workers.',
+    tags: ['Whisper', 'NLP', 'FastAPI', 'Redis'],
+    category: 'Backend',
     featured: false,
-    link: 'https://github.com/yuvarajr/noteweave-api',
+    link: 'https://github.com/YUVARAJ-R-ai',
   },
   {
     title: 'Miltz',
-    description: 'React Three Fiber 3D marketing site',
-    tags: ['Three.js', 'React', 'WebGL'],
+    description: 'Cinematic 3D marketing site with scroll-linked React Three Fiber animations and WebGL product visuals.',
+    tags: ['Three.js', 'R3F', 'Next.js', 'WebGL'],
+    category: 'Frontend',
     featured: false,
-    link: 'https://github.com/yuvarajr/miltz',
-  },
-  {
-    title: 'Power Fault Detection',
-    description: '100% accuracy Random Forest classifier',
-    tags: ['ML', 'Random Forest', 'ESP8266'],
-    featured: false,
-    link: 'https://github.com/yuvarajr/power-fault-detection',
+    link: 'https://github.com/YUVARAJ-R-ai',
   },
 ];
 
+const CATEGORIES = ['All', 'AI/ML', 'Full Stack', 'Backend', 'Frontend', 'Blockchain'];
+
 const Projects: React.FC = () => {
-  const featuredProject = projects[0];
-  const stackedProjects = projects.slice(1, 3);
-  const remainingProjects = projects.slice(3);
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const filtered = activeCategory === 'All'
+    ? projects
+    : projects.filter((p) => p.category === activeCategory);
+
+  const featured = filtered[0];
+  const rest = filtered.slice(1);
 
   return (
     <section id="projects" className="projects section-padding">
       <div className="container">
-        <h2 className="section-title mono fade-in delay-1">
-          Projects <span className="comment">// selected work</span>
-        </h2>
+        <div className="projects-header fade-in delay-1">
+          <h2 className="section-title mono">
+            Projects <span className="comment">// selected work</span>
+          </h2>
 
-        <div className="projects-grid fade-in delay-2">
-          {/* Master-stack tiling layout */}
-          <div className="tiling-master">
-            <a href={featuredProject.link} target="_blank" rel="noopener noreferrer" className="project-card featured block-link">
-              <div className="card-top-border"></div>
-              <h3 className="project-title">{featuredProject.title}</h3>
-              <p className="project-desc mono">{featuredProject.description}</p>
-              <div className="project-tags">
-                {featuredProject.tags.map((tag, i) => (
-                  <span key={i} className="tag mono">{tag}</span>
-                ))}
-              </div>
-              <span className="hover-arrow mono">&#x2197; View on GitHub</span>
-            </a>
-          </div>
-          
-          <div className="tiling-stack">
-            {stackedProjects.map((project, index) => (
-              <a key={index} href={project.link} target="_blank" rel="noopener noreferrer" className="project-card block-link">
-                <div className="card-top-border"></div>
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-desc mono">{project.description}</p>
-                <div className="project-tags">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className="tag mono">{tag}</span>
-                  ))}
-                </div>
-                <span className="hover-arrow mono">&#x2197; View on GitHub</span>
-              </a>
+          <div className="filter-bar mono">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}
+                onClick={() => setActiveCategory(cat)}
+              >
+                {cat}
+              </button>
             ))}
           </div>
         </div>
 
-        <div className="projects-grid-3 fade-in delay-3 mt-4">
-          {remainingProjects.map((project, index) => (
-            <a key={index} href={project.link} target="_blank" rel="noopener noreferrer" className="project-card block-link">
-              <div className="card-top-border"></div>
+        {featured && (
+          <div className="projects-featured fade-in delay-2">
+            <a
+              href={featured.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`project-card featured block-link ${hoveredIndex === 0 ? 'hovered' : ''}`}
+              onMouseEnter={() => setHoveredIndex(0)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <div className="card-accent-line"></div>
+              <div className="featured-inner">
+                <div>
+                  <span className="project-category mono">{featured.category}</span>
+                  <h3 className="project-title featured-title">{featured.title}</h3>
+                  <p className="project-desc mono">{featured.description}</p>
+                </div>
+                <div className="featured-footer">
+                  <div className="project-tags">
+                    {featured.tags.map((tag, i) => <span key={i} className="tag mono">{tag}</span>)}
+                  </div>
+                  <span className="hover-arrow mono">↗ GitHub</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        )}
+
+        <div className={`projects-grid fade-in delay-3 ${rest.length > 0 ? '' : 'empty'}`}>
+          {rest.map((project, index) => (
+            <a
+              key={`${project.title}-${index}`}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`project-card block-link ${hoveredIndex === index + 1 ? 'hovered' : ''}`}
+              onMouseEnter={() => setHoveredIndex(index + 1)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <div className="card-accent-line"></div>
+              <span className="project-category mono">{project.category}</span>
               <h3 className="project-title">{project.title}</h3>
               <p className="project-desc mono">{project.description}</p>
-              <div className="project-tags">
-                {project.tags.map((tag, i) => (
-                  <span key={i} className="tag mono">{tag}</span>
-                ))}
+              <div className="project-footer">
+                <div className="project-tags">
+                  {project.tags.map((tag, i) => <span key={i} className="tag mono">{tag}</span>)}
+                </div>
+                <span className="hover-arrow mono">↗</span>
               </div>
-              <span className="hover-arrow mono">&#x2197; View on GitHub</span>
             </a>
           ))}
         </div>
+
+        {filtered.length === 0 && (
+          <p className="no-results mono">No projects in this category yet.</p>
+        )}
       </div>
     </section>
   );

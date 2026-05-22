@@ -1,9 +1,9 @@
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 92vh;
   display: flex;
   align-items: center;
-  padding-top: 80px; /* Accounts for nav */
+  padding-top: 72px;
 }
 
 .hero-bg {
@@ -84,10 +84,17 @@
 
 .terminal-header {
   background-color: rgba(255, 255, 255, 0.03);
-  padding: 12px 16px;
+  padding: 10px 16px;
   border-bottom: 1px solid var(--border-muted);
   display: flex;
   align-items: center;
+  gap: 12px;
+}
+
+.terminal-title {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
 }
 
 .terminal-dots {
@@ -128,14 +135,79 @@
   margin-top: 8px;
 }
 
+.hero-eyebrow {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.hero-eyebrow .comment {
+  color: var(--terminal-prompt);
+}
+
 .prompt {
   color: var(--terminal-prompt);
-  margin-right: 8px;
+}
+
+.prompt-sep {
+  color: var(--text-muted);
+}
+
+.prompt-path {
+  color: var(--accent-primary);
+  opacity: 0.8;
+}
+
+.prompt-dollar {
+  color: var(--text-main);
 }
 
 .cmd {
+  color: var(--text-main);
+}
+
+.terminal-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  opacity: 0.6;
+}
+
+.hint-cmd {
   color: var(--accent-primary);
 }
+
+/* neofetch output layout */
+.neofetch-output {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.nf-logo {
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.nf-c1 { color: var(--accent-primary); }
+.nf-c2 { color: var(--accent-secondary); }
+
+.nf-info {
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+.nf-user { color: var(--accent-primary); font-weight: 600; }
+.nf-sep  { color: var(--text-muted); }
+.nf-key  { color: var(--accent-primary); min-width: 80px; display: inline-block; }
+
+/* ls colors */
+.ls-dir  { color: var(--accent-primary); }
+.ls-file { color: var(--text-main); }
+
+/* git hash */
+.git-hash { color: var(--accent-secondary); margin-right: 8px; }
 
 .active-line {
   position: relative;
