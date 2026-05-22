@@ -13,13 +13,13 @@ const Contact: React.FC = () => {
           </p>
           
           <div className="contact-links fade-in delay-2">
-            <a href="https://github.com/yuvaraj-r" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="GitHub">
+            <a href="https://github.com/YUVARAJ-R-ai" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="GitHub">
               <FaGithub />
             </a>
-            <a href="https://linkedin.com/in/yuvaraj-r" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="LinkedIn">
+            <a href="#" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="LinkedIn">
               <FaLinkedin />
             </a>
-            <a href="mailto:contact@yuvaraj-r.com" className="contact-icon" aria-label="Email">
+            <a href="yuvaraj28022005@gmail.com" className="contact-icon" aria-label="Email">
               <FaEnvelope />
             </a>
           </div>
