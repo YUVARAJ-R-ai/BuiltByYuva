@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Hero.css';
+import AsciiResume from './AsciiResume';
 
 interface TerminalHistoryItem {
   command: string;
@@ -143,6 +144,9 @@ const getOutput = (cmd: string): React.ReactNode | null => {
     case 'pwd':
       return '/home/yuvaraj/portfolio';
 
+    case 'resume':
+      return <AsciiResume />;
+
     case 'clear':
       return null;
 
@@ -160,6 +164,7 @@ const getOutput = (cmd: string): React.ReactNode | null => {
           {'  '}git log --oneline{'     '}— recent work<br/>
           {'  '}ping built-by-yuva...{'  '}— ping this site<br/>
           {'  '}man yuvaraj{'           '}— the manual<br/>
+          {'  '}resume{'                 '}— 3D ASCII interactive resume<br/>
           {'  '}date{'                  '}— current time<br/>
           {'  '}clear{'                 '}— clear terminal
         </div>
@@ -229,7 +234,7 @@ const Hero: React.FC = () => {
       setInput(next < 0 ? '' : cmdHistory[next] ?? '');
     } else if (e.key === 'Tab') {
       e.preventDefault();
-      const completions = ['help', 'whoami', 'neofetch', 'ls', 'ls projects/', 'cat contact.txt', 'cat skills/stack.txt', 'git log --oneline', 'ping built-by-yuva.vercel.app', 'man yuvaraj', 'uname -a', 'date', 'uptime', 'pwd', 'clear'];
+      const completions = ['help', 'whoami', 'neofetch', 'ls', 'ls projects/', 'cat contact.txt', 'cat skills/stack.txt', 'git log --oneline', 'ping built-by-yuva.vercel.app', 'man yuvaraj', 'resume', 'uname -a', 'date', 'uptime', 'pwd', 'clear'];
       const match = completions.find((c) => c.startsWith(input) && c !== input);
       if (match) setInput(match);
     }

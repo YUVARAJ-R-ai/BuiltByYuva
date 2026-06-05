@@ -1,0 +1,252 @@
+.ascii-resume-container {
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 10, 16, 0.95);
+  border: 1px solid var(--border-color, #2d2d3d);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  max-width: 780px;
+  width: 100%;
+}
+
+.ascii-resume-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.ascii-left-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 240px;
+}
+
+.ascii-art-pre {
+  margin: 0;
+  padding: 8px;
+  font-size: 10.5px;
+  line-height: 1.1;
+  font-weight: bold;
+  height: 200px;
+  width: 220px;
+  display: block;
+  overflow: hidden;
+  background: #050508;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ascii-art-pre.cube {
+  color: var(--accent-primary, #06b6d4); /* cyan */
+  text-shadow: 0 0 4px rgba(6, 182, 212, 0.4);
+}
+
+.ascii-art-pre.torus {
+  color: var(--accent-secondary, #a855f7); /* violet/magenta */
+  text-shadow: 0 0 4px rgba(168, 85, 247, 0.4);
+}
+
+.ascii-model-toggle {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.toggle-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #a0aec0;
+  padding: 4px 8px;
+  font-size: 11px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.toggle-btn.active {
+  background: rgba(6, 182, 212, 0.15);
+  border-color: var(--accent-primary, #06b6d4);
+  color: var(--accent-primary, #06b6d4);
+}
+
+.ascii-divider {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  align-self: stretch;
+}
+
+.ascii-right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ascii-resume-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+.ascii-resume-title {
+  font-size: 12px;
+  color: var(--accent-primary, #06b6d4);
+}
+
+.ascii-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 6px;
+}
+
+.ascii-tab-btn {
+  background: none;
+  border: none;
+  color: #718096;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.ascii-tab-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ascii-tab-btn.active {
+  color: var(--accent-primary, #06b6d4);
+  background: rgba(6, 182, 212, 0.1);
+  font-weight: bold;
+}
+
+.ascii-tab-content {
+  min-height: 130px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #cbd5e0;
+}
+
+.tab-pane .tab-intro {
+  margin: 0 0 10px 0;
+  font-size: 12.5px;
+  color: #a0aec0;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.details-row {
+  display: flex;
+  gap: 6px;
+}
+
+.details-label {
+  color: var(--accent-secondary, #a855f7);
+  font-weight: bold;
+}
+
+.skills-section {
+  margin-bottom: 8px;
+}
+
+.skills-section strong {
+  color: var(--accent-primary, #06b6d4);
+  font-size: 12px;
+}
+
+.skills-section p {
+  margin: 2px 0 0 0;
+  font-size: 12.5px;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project-item p {
+  margin: 2px 0 0 0;
+  font-size: 12px;
+  color: #a0aec0;
+}
+
+.project-tag {
+  font-size: 9px;
+  background: rgba(168, 85, 247, 0.15);
+  color: var(--accent-secondary, #a855f7);
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-left: 6px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.contact-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-pane p {
+  margin: 0 0 6px 0;
+  color: #a0aec0;
+}
+
+.contact-methods div {
+  margin-bottom: 4px;
+}
+
+.contact-methods a {
+  color: var(--accent-primary, #06b6d4);
+  text-decoration: none;
+}
+
+.contact-methods a:hover {
+  text-decoration: underline;
+}
+
+.ascii-resume-footer {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.05);
+  font-size: 10px;
+  color: #718096;
+  text-align: center;
+}
+
+/* Make it stack vertically on small screens */
+@media (max-width: 580px) {
+  .ascii-resume-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+  .ascii-left-panel {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .ascii-divider {
+    height: 1px;
+    width: 100%;
+    align-self: auto;
+  }
+}
