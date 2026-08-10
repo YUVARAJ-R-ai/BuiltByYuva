@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# SSH host keys — never commit private keys
+keys/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

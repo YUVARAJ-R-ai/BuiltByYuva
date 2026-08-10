@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 
-const readline = require('readline');
+import readline from 'readline';
 
 // Setup input stream
 readline.emitKeypressEvents(process.stdin);
 if (process.stdin.isTTY) {
   process.stdin.setRawMode(true);
+} else {
+  // When stdin is a pipe (e.g. streamed over an SSH channel rather than a
+  // local TTY) it starts paused — resume it so keypress events still fire.
+  process.stdin.resume();
 }
 
 // Global state

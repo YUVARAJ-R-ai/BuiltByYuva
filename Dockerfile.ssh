@@ -1,0 +1,25 @@
+# SSH-accessible 3D ASCII resume server.
+# Build:  docker build -f Dockerfile.ssh -t ssh-resume .
+# Run:    docker run -p 2222:2222 ssh-resume
+# Then:   ssh -p 2222 <docker-host>
+FROM node:20-slim
+
+# openssh-client provides ssh-keygen for generating the host key at startup.
+RUN apt-get update && apt-get install -y --no-install-recommends openssh-client \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install only production deps (ssh2 + what resume.js needs from node core).
+COPY package*.json ./
+RUN npm install --omit=dev
+
+COPY bin/ ./bin/
+COPY docker-entrypoint.sh ./
+RUN chmod +x docker-entrypoint.sh
+
+EXPOSE 2222
+
+# The entrypoint generates a host key on first boot (kept out of the image so
+# no private key is ever baked into a layer), then launches the server.
+ENTRYPOINT ["./docker-entrypoint.sh"]

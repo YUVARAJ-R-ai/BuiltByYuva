@@ -1,5 +1,12 @@
 # Implementation Plan: SSH-Accessible 3D ASCII Resume
 
+> **✅ Implemented (2026-08-10).** Approach 1 is live in the repo:
+> - `bin/ssh-server.js` — ssh2 server (ESM), passwordless, spawns `bin/resume.js` per connection.
+> - `bin/resume.js` — fixed to run under this ESM project and to read input when stdin is a pipe (the SSH case).
+> - Host key generated into `keys/` (gitignored). Run locally with `npm run resume:ssh`, then `ssh -p 2222 localhost`.
+> - Deployment scaffolding: `Dockerfile.ssh` + `docker-entrypoint.sh` (Approach 1 Docker path) and `deploy/ssh-resume.service` (native systemd, matching this server).
+> - **Not yet done:** public exposure (DNS / port-forward / Tailscale Funnel) — pending a decision on domain and exposure method.
+
 This plan outlines how to host your 3D ASCII Resume so that anyone can access it directly from their local terminal using a simple SSH command, for example:
 ```bash
 ssh resume.yuvaraj.dev

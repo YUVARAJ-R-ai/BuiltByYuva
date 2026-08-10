@@ -1,0 +1,25 @@
+# systemd user unit for the SSH-accessible 3D ASCII resume.
+#
+# Install:
+#   cp deploy/ssh-resume.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now ssh-resume
+#   journalctl --user -u ssh-resume -f
+#
+# Matches this box's convention: user-level service, Restart=always, no Docker.
+[Unit]
+Description=SSH-accessible 3D ASCII resume server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/yuvaraj/project/BuiltByYuva
+ExecStart=/home/yuvaraj/.local/bin/node bin/ssh-server.js
+# Override the listen port/host here if desired:
+# Environment=SSH_RESUME_PORT=2222
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
