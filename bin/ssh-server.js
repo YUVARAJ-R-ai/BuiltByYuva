@@ -56,7 +56,10 @@ const server = new Server({ hostKeys: [hostKey] }, (client) => {
 
         // Spawn the resume renderer. It writes ANSI escape codes and reads
         // keystrokes on stdin — both flow over the SSH channel via pipes.
-        const resumeProcess = spawn('node', [RESUME_SCRIPT], {
+        // Use process.execPath (absolute node path) rather than the bare
+        // "node" name: under systemd/minimal-PATH environments a bare name
+        // fails with spawn ENOENT.
+        const resumeProcess = spawn(process.execPath, [RESUME_SCRIPT], {
           env: {
             ...process.env,
             TERM: (ptyInfo && ptyInfo.term) || 'xterm-256color',
