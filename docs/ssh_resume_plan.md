@@ -5,7 +5,54 @@
 > - `bin/resume.js` — fixed to run under this ESM project and to read input when stdin is a pipe (the SSH case).
 > - Host key generated into `keys/` (gitignored). Run locally with `npm run resume:ssh`, then `ssh -p 2222 localhost`.
 > - Deployment scaffolding: `Dockerfile.ssh` + `docker-entrypoint.sh` (Approach 1 Docker path) and `deploy/ssh-resume.service` (native systemd, matching this server).
-> - **Not yet done:** public exposure (DNS / port-forward / Tailscale Funnel) — pending a decision on domain and exposure method.
+> - **Deployed (2026-08-10):** running as the `ssh-resume` systemd user service on the home server, exposed publicly via Tailscale Funnel. See **[Connecting](#connecting-as-deployed)** below.
+
+---
+
+## Connecting (as deployed)
+
+The server runs as a systemd user service (`~/.config/systemd/user/ssh-resume.service`)
+listening on `0.0.0.0:2222`, and is published to the internet via a Tailscale
+**TLS-terminated TCP** Funnel on port `10000`.
+
+### 1. On the tailnet (clean, no wrapper)
+Anyone on the tailnet gets the plain-SSH experience:
+```bash
+ssh -p 2222 debian-home-server.tailb4a856.ts.net
+```
+
+### 2. Public internet (via Funnel)
+> ⚠️ **Caveat.** Tailscale Funnel routes public traffic by **TLS SNI**, and SSH
+> doesn't begin with a TLS handshake. So a bare `ssh <host>` cannot traverse the
+> Funnel — the client must wrap the SSH stream in TLS. Funnel terminates the TLS
+> and forwards plaintext SSH to the server. This works, but isn't the bare
+> `ssh resume.yuvaraj.dev` UX. For that, port-forward TCP 22/2222 on a public IP
+> (see "Deployment & Hosting" below) instead of Funnel.
+
+One-liner (requires `openssl`):
+```bash
+ssh -o ProxyCommand="openssl s_client -quiet -connect debian-home-server.tailb4a856.ts.net:10000 -servername debian-home-server.tailb4a856.ts.net 2>/dev/null" resume@x
+```
+
+Nicer: add this to `~/.ssh/config`, then just `ssh resume-yuvaraj`:
+```sshconfig
+Host resume-yuvaraj
+    HostName debian-home-server.tailb4a856.ts.net
+    User resume
+    ProxyCommand openssl s_client -quiet -connect %h:10000 -servername %h 2>/dev/null
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+```
+
+### Managing the deployment
+```bash
+# service
+systemctl --user status ssh-resume
+journalctl --user -u ssh-resume -f
+# funnel
+tailscale funnel status
+tailscale funnel --tls-terminated-tcp=10000 off   # to unpublish
+```
 
 This plan outlines how to host your 3D ASCII Resume so that anyone can access it directly from their local terminal using a simple SSH command, for example:
 ```bash
