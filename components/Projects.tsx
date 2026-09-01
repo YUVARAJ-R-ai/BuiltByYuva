@@ -66,6 +66,14 @@ const projects = [
     featured: false,
     link: 'https://github.com/YUVARAJ-R-ai',
   },
+  {
+    title: 'DevOrchestrator',
+    description: 'Multi-agent orchestration system that automates the SDLC pipeline — from planning and coding to testing and deployment.',
+    tags: ['Python', 'Multi-Agent', 'SDLC', 'Automation'],
+    category: 'AI/ML',
+    featured: false,
+    link: 'https://github.com/YUVARAJ-R-ai/DevOrchestrator',
+  },
 ];
 
 const CATEGORIES = ['All', 'AI/ML', 'Full Stack', 'Backend', 'Frontend', 'Blockchain'];
